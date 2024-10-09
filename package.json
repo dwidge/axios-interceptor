@@ -1,0 +1,41 @@
+{
+  "name": "@dwidge/axios-interceptor",
+  "version": "0.0.1",
+  "description": "Helpful interceptor for axios to add multiple baseURL support.",
+  "repository": "github:dwidge/axios-interceptor",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "prepare": "rimraf dist && ncp assets/ dist/ && tsc -b tsconfig*",
+    "dev": "tsc -w",
+    "test": "node --test"
+  },
+  "peerDependencies": {
+    "axios": "^1.7.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "ncp": "^2.0.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.6.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@9.7.1",
+  "engines": {
+    "node": ">=20"
+  }
+}
