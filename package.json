@@ -18,9 +18,8 @@
     "src"
   ],
   "scripts": {
-    "prepare": "rimraf dist && ncp assets/ dist/ && tsc -b tsconfig*",
-    "dev": "tsc -w",
-    "test": "node --test"
+    "prepare": "rimraf dist && ncp assets/ dist/ && tsc -b . tsconfig.cjs.json",
+    "test": "node --enable-source-maps --test --test-name-pattern"
   },
   "peerDependencies": {
     "axios": "^1.7.7"
