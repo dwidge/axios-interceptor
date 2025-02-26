@@ -15,21 +15,32 @@ export function attachBaseUrlInterceptor(
   let baseUrlCache: BaseUrlCache | null = null;
   const CACHE_DURATION_MS = 2 * 60 * 1000; // 2 minutes
 
-  const parseBaseUrls = (baseURL: string): string[] => {
-    return baseURL.split(",").map((url) => url.trim());
-  };
+  const parseBaseUrls = (baseURL: string): string[] =>
+    baseURL.split(",").map((url) => url.trim());
 
   const pingUrls = async (urls: string[]): Promise<string> => {
     const pingPromises = urls.map((url) =>
       axios
         .get(url, { timeout: 5000 }) // timeout of 5 seconds per ping
-        .then(() => url),
+        .then(() => url)
+        .catch((error) =>
+          Promise.reject(
+            new Error(`pingUrlsE1: Ping to ${url} failed: ${error}`),
+          ),
+        ),
     );
 
     try {
       return await Promise.any(pingPromises);
     } catch (error) {
-      throw new Error(`attachBaseUrlInterceptorE1: ${error}`);
+      let errorMessage =
+        error instanceof AggregateError
+          ? "\n" +
+            error.errors.map((e, index) => `  ${index + 1}. ${e}`).join("\n")
+          : ` ${error}`;
+      throw new Error("pingUrlsE2: All base URLs failed:" + errorMessage, {
+        cause: error,
+      });
     }
   };
 
