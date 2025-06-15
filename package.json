@@ -1,6 +1,6 @@
 {
   "name": "@dwidge/axios-interceptor",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Helpful interceptor for axios to add multiple baseURL support.",
   "repository": "github:dwidge/axios-interceptor",
   "main": "./dist/cjs/index.js",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/node": "^22.5.4",
     "ncp": "^2.0.0",
-    "rimraf": "^5.0.5",
+    "rimraf": "^6.0.1",
     "typescript": "^5.7.3"
   },
   "publishConfig": {
